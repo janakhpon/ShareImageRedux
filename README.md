@@ -1,5 +1,5 @@
 # ShareImageRedux
-  ShareImageRedux is built for storing file as cdn for other projects so basically you can share Previews, Image and Scanned Signatures with privacy. It's built on MERN stack using Express RESTFUL API on Backend. ShareImageRedux can be used as a sharing platform for Signature, scanned document and also can be used to upload images and previews for Technological University of Mawlamyine's data reference and DashProject of Projects store. Notice that CRUD options are available to admin only. Please Check the `RELEASE_STATUS` before you clone. Here is a deployed link [herokudeploy](https://ShareImageRedux.now.sh/)
+  ShareImageRedux is built for storing file as cdn for other projects so basically you can share Previews, Image and Scanned Signatures with privacy. It's built on MERN stack using Express RESTFUL API on Backend. ShareImageRedux can be used as a sharing platform for Signature, scanned document and also can be used to upload images and previews for Technological University of Mawlamyine's data reference and DashProject of Projects store. Notice that CRUD options are available to admin only. Please Check the `RELEASE_STATUS` before you clone. Here is a deployed link [herokudeploy](https://ShareImage.now.sh/)
 
 
 
@@ -54,7 +54,7 @@ Install Dependencies using [yarn](https://yarnpkg.com/en/)
 
 
 ## RELEASE_STATUS:IN PROGRESS
-## RELEASE_CODE: GDEV020
+## RELEASE_CODE: GDEV005
  Sorry this project is not completely done yet and only a few features are available. If you are considering about cloning this project please wait till it's completed.
 
 ## Description
