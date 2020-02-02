@@ -3,7 +3,8 @@ import {
     GET_ME,
     USER_REMOVE,
     USER_RESET,
-    USER_LOADING
+    USER_LOADING,
+    CLEAR_CURRENT_USER
 } from '../actions/types'
 
 const initialState = {
