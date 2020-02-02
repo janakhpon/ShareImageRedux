@@ -1,17 +1,17 @@
-# ShareImage
-  ShareImage is built for storing file as cdn for other projects so basically you can share Previews, Image and Scanned Signatures with privacy. It's built on MERN stack using Express RESTFUL API on Backend. ShareImage can be used as a sharing platform for Signature, scanned document and also can be used to upload images and previews for Technological University of Mawlamyine's data reference and DashProject of Projects store. Notice that CRUD options are available to admin only. Please Check the `RELEASE_STATUS` before you clone. Here is a deployed link [herokudeploy](https://shareimage.now.sh/)
+# ShareImageRedux
+  ShareImageRedux is built for storing file as cdn for other projects so basically you can share Previews, Image and Scanned Signatures with privacy. It's built on MERN stack using Express RESTFUL API on Backend. ShareImageRedux can be used as a sharing platform for Signature, scanned document and also can be used to upload images and previews for Technological University of Mawlamyine's data reference and DashProject of Projects store. Notice that CRUD options are available to admin only. Please Check the `RELEASE_STATUS` before you clone. Here is a deployed link [herokudeploy](https://ShareImageRedux.now.sh/)
 
 
 
 # Usage
 clone the server repository first
-    git clone https://github.com/janakhpon/ShareImage.git
+    git clone https://github.com/janakhpon/ShareImageRedux.git
 
 clone the client repository
-    git clone https://github.com/janakhpon/ShareImage.git
+    git clone https://github.com/janakhpon/ShareImageRedux.git
 
 Get into server directory root folder
-    cd ShareImage
+    cd ShareImageRedux
 
 Install Dependencies using [npm](https://www.npmjs.com/)
 
@@ -30,7 +30,7 @@ Install Dependencies using [yarn](https://yarnpkg.com/en/)
 then for client,
 
 Get into client directory root folder
-    cd ShareImage
+    cd ShareImageRedux
 
 Install Dependencies using [npm](https://www.npmjs.com/)
 
@@ -50,7 +50,7 @@ Install Dependencies using [yarn](https://yarnpkg.com/en/)
 
 # FULL RESOURCES
  [BACKEND/SERVER](https://tumlmimg.herokuapp.com/)
- [FRONTEND/CLIENT](https://shareimage.now.sh/)
+ [FRONTEND/CLIENT](https://ShareImageRedux.now.sh/)
 
 
 ## RELEASE_STATUS:IN PROGRESS
