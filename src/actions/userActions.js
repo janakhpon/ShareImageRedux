@@ -16,10 +16,10 @@ export const registerUser = (userData) => dispatch => {
     })
     if (cb.data.err !== '') {
         dispatch({
-            type: GET
+            type: USER_SIGNUP_ERROR,
+            payload: cb.data.err
         })
     } else {
-        setOpen(false)
         history.push('/Page-signin')
     }
 }
