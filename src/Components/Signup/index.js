@@ -23,6 +23,8 @@ import CloseIcon from '@material-ui/icons/Close'
 import SnackbarContent from '@material-ui/core/SnackbarContent'
 import Snackbar from '@material-ui/core/Snackbar'
 import IconButton from '@material-ui/core/IconButton'
+import { connect } from 'react-redux'
+import { userSignup } from '../../actions/userActions'
 
 const NavLink = styled(Link)`
     text-decoration: none;
@@ -154,7 +156,8 @@ const CustomTextField = withStyles(styles)(props => {
 const formData = new FormData()
 
 
-const PageSignup = () => {
+const PageSignup = (props) => {
+
     const history = useHistory()
     const [values, setValues] = React.useState(INITIAL_VALUES)
     const [noti, setNoti] = React.useState(NOTI_VALUES)
@@ -184,23 +187,10 @@ const PageSignup = () => {
         formData.set('phone', phone)
         formData.set('password', password)
         formData.set('position', position)
-        try {
-            const cb = await axios({
-                method: 'post',
-                url: URL_USER_SIGNUP,
-                data: formData,
-                config: { headers: { 'Content-Type': 'multipart/form-data' } }
-            })
-            if (cb.data.err !== '') {
-                setNoti({ err: cb.data.err })
-            } else {
-                setOpen(false)
-                history.push('/Page-signin')
-            }
 
-        } catch (err) {
-            setNoti({ err: err })
-        }
+        let dbb = await props.userSignup(formData)
+        console.log(dbb)
+        
     }
 
     const handleSelectChange = event => {
@@ -335,4 +325,10 @@ const PageSignup = () => {
     );
 }
 
-export default PageSignup;
+const mapStateToProps = state => ({
+    user: state.user,
+    errors: state.errors
+});
+
+
+export default connect(mapStateToProps, { userSignup })(PageSignup)
