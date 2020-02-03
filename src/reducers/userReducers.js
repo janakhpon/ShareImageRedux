@@ -1,6 +1,7 @@
 import {
     GET_USERS,
     GET_ME,
+    USER_SIGNUP_ERROR,
     USER_REMOVE,
     USER_RESET,
     USER_LOADING,
@@ -10,6 +11,7 @@ import {
 const initialState = {
     user: null,
     users: [],
+    error: null,
     loading: false
 };
 
@@ -24,6 +26,12 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 user: action.payload,
+                loading: false
+            };
+        case USER_SIGNUP_ERROR:
+            return {
+                ...state,
+                error: action.payload,
                 loading: false
             };
         case GET_USERS:
