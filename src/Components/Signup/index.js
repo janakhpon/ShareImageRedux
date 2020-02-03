@@ -157,7 +157,8 @@ const formData = new FormData()
 
 
 const PageSignup = (props) => {
-
+    console.log(props.users.user)
+    console.log(props.errors)
     const history = useHistory()
     const [values, setValues] = React.useState(INITIAL_VALUES)
     const [noti, setNoti] = React.useState(NOTI_VALUES)
@@ -326,7 +327,7 @@ const PageSignup = (props) => {
 }
 
 const mapStateToProps = state => ({
-    user: state.user,
+    users: state.users,
     errors: state.errors
 });
 
