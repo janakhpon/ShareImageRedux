@@ -191,7 +191,7 @@ const PageSignup = (props) => {
 
         let dbb = await props.userSignup(formData)
         console.log(dbb)
-        
+
     }
 
     const handleSelectChange = event => {
