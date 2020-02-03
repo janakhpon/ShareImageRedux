@@ -23,7 +23,8 @@ import IconButton from '@material-ui/core/IconButton';
 import axios from 'axios'
 import { URL_USER_SIGNIN } from '../../Requests'
 import setAuthToken from '../utils'
-
+import { connect } from 'react-redux'
+import { userSignin } from '../../actions/userActions'
 
 const NavLink = styled(Link)`
     text-decoration: none;
@@ -160,7 +161,10 @@ const CustomTextField = withStyles(styles)(props => {
 const formData = new FormData()
 
 
-const PageSignin = () => {
+const PageSignin = (props) => {
+    console.log("Signin")
+    console.log(props.users.user)
+    console.log(props.users.error)
     const history = useHistory()
     const [values, setValues] = React.useState(INITIAL_VALUES)
     const [noti, setNoti] = React.useState(NOTI_VALUES)
@@ -214,7 +218,7 @@ const PageSignin = () => {
     return (
         <Container component="main" maxWidth="xs">
             {
-                noti.err ? (
+                props.users.user.username ? (
                     <Snackbar
                         anchorOrigin={{
                             vertical: 'bottom',
@@ -229,7 +233,7 @@ const PageSignin = () => {
                             aria-describedby="client-snackbar"
                             message={
                                 <span id="client-snackbar" className={classes.message}>
-                                    {noti.err}
+                                    {props.users.user.username} is registered
                                 </span>
                             }
                             action={[
@@ -296,7 +300,7 @@ const PageSignin = () => {
                         justify="center"
                         alignitems="center">
                         <Grid item xs={6} >
-                            <NavLink to={routes.SIGNUP} variant="body2" alignItems="center">
+                            <NavLink to={routes.SIGNUP} variant="body2" alignitems="center">
                                 {"Don't have an account? SIGN UP"}
                             </NavLink>
                         </Grid>
@@ -307,4 +311,8 @@ const PageSignin = () => {
     );
 }
 
-export default PageSignin;
+const mapStateToProps = state => ({
+    users: state.users
+})
+
+export default connect(mapStateToProps, { userSignin })(PageSignin)
