@@ -399,7 +399,7 @@ export default function PageNav({ user, noti, count }) {
                             </Toolbar>
                         </AppBar>
                     )
-            }}
+            }
             {
                 err ? (
                     renderMobileMenu
