@@ -23,6 +23,7 @@ import CloseIcon from '@material-ui/icons/Close'
 import SnackbarContent from '@material-ui/core/SnackbarContent'
 import Snackbar from '@material-ui/core/Snackbar'
 import IconButton from '@material-ui/core/IconButton'
+import PageSignin from '../Signin'
 import { connect } from 'react-redux'
 import { userSignup, getCurrentUser } from '../../actions/userActions'
 
@@ -158,13 +159,14 @@ const formData = new FormData()
 
 const PageSignup = (props) => {
     console.log(props.users.user)
-    console.log(props.errors)
+    console.log(props.users.error)
     const history = useHistory()
     const [values, setValues] = React.useState(INITIAL_VALUES)
     const [noti, setNoti] = React.useState(NOTI_VALUES)
     const [open, setOpen] = React.useState(true)
     const [select, setSelect] = React.useState('')
     const classes = useStyles()
+
     const handleChange = (e) => {
         e.persist()
         setValues(previousValues => ({
@@ -188,9 +190,12 @@ const PageSignup = (props) => {
         formData.set('phone', phone)
         formData.set('password', password)
         formData.set('position', position)
+        try {
+            await props.userSignup(formData)
 
-        let dbb = await props.userSignup(formData)
-        console.log(dbb)
+        } catch (err) {
+
+        }
 
     }
 
@@ -198,10 +203,12 @@ const PageSignup = (props) => {
         setSelect(event.target.value)
     }
 
+    if (props.users.user != null)  return <PageSignin />
+
     return (
         <Container component="main" maxWidth="xs">
             {
-                noti.err ? (
+                props.users.error ? (
                     <Snackbar
                         anchorOrigin={{
                             vertical: 'bottom',
@@ -216,7 +223,7 @@ const PageSignup = (props) => {
                             aria-describedby="client-snackbar"
                             message={
                                 <span id="client-snackbar" className={classes.message}>
-                                    {noti.err}
+                                    {props.users.error}
                                 </span>
                             }
                             action={[
@@ -227,6 +234,9 @@ const PageSignup = (props) => {
                         />
                     </Snackbar>
                 ) : ('')
+            }
+            {
+                props.users.user === null ? ('') : (history.push(`${routes.SIGNIN}`))
             }
             <CssBaseline />
             <div className={classes.paper}>
@@ -328,7 +338,7 @@ const PageSignup = (props) => {
 
 const mapStateToProps = state => ({
     users: state.users,
-    errors: state.errors
+    error: state.error
 });
 
 
