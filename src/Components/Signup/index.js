@@ -24,7 +24,7 @@ import SnackbarContent from '@material-ui/core/SnackbarContent'
 import Snackbar from '@material-ui/core/Snackbar'
 import IconButton from '@material-ui/core/IconButton'
 import { connect } from 'react-redux'
-import { userSignup } from '../../actions/userActions'
+import { userSignup, getCurrentUser } from '../../actions/userActions'
 
 const NavLink = styled(Link)`
     text-decoration: none;

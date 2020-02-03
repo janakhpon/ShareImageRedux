@@ -10,6 +10,7 @@ export const USER_RESET = 'USER_RESET'
 export const USER_REMOVE = 'USER_REMOVE'
 export const GET_USERS = 'GET_USERS'
 export const GET_ME = 'GET_ME'
+export const SET_CURRENT_USER = 'SET_CURRENT_USER'
 export const CLEAR_CURRENT_USER = 'CLEAR_CURRENT_USER'
 
 //POST TYPES
