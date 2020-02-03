@@ -6,8 +6,7 @@ import { GET_USERS, GET_ME, USER_REMOVE, USER_RESET, USER_SIGNIN, USER_SIGNUP, U
 
 
 //USER_REGISTER
-export const registerUser = (userData) => dispatch => {
-    let history = useHistory()
+export const userSignup = (userData) => async dispatch => {
     const cb = await axios({
         method: 'post',
         url: URL_USER_SIGNUP,
@@ -19,7 +18,6 @@ export const registerUser = (userData) => dispatch => {
             type: USER_SIGNUP_ERROR,
             payload: cb.data.err
         })
-    } else {
-        history.push('/Page-signin')
     }
+    console.log(cb)
 }
