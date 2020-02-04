@@ -14,4 +14,9 @@ export const SET_CURRENT_USER = 'SET_CURRENT_USER'
 export const CLEAR_CURRENT_USER = 'CLEAR_CURRENT_USER'
 
 //POST TYPES
+export const DATA_ADD = 'DATA_ADD'
+export const DATA_UPDATE = 'DATA_UPDATE'
+export const DATA_DELETE = 'DATA_DELETE'
+export const DATA_ERROR = 'DATA_ERROR'
+export const DATA_GET = 'DATA_GET'
 
