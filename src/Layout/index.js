@@ -7,7 +7,6 @@ import * as routes from '../Routes'
 import Grid from '@material-ui/core/Grid'
 import PageNav from '../Components/Navbar'
 import PageHome from '../Components/Home'
-import PageRegister from '../Components/Register'
 import PageSignup from '../Components/Signup'
 import PageSignin from '../Components/Signin'
 import PageList from '../Components/List'
@@ -104,11 +103,6 @@ const Layout = () => {
             exact
             path={routes.HOME}
             component={() => <PageHome />}
-          />
-          <Route
-            exact
-            path={routes.REGISTER}
-            component={() => <PageRegister />}
           />
           <Route
             exact

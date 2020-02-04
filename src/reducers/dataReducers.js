@@ -10,12 +10,11 @@ import {
 
 
 const initialState = {
-    data: null,
-    storage: [],
+    posts: [],
+    post: {},
     error: null,
     loading: false
 }
-
 
 export default function (state = initialState, action) {
     switch (action.type) {
@@ -27,7 +26,7 @@ export default function (state = initialState, action) {
         case DATA_ADD:
             return {
                 ...state,
-                storage: [action.payload, ...state.storage]
+                posts: [action.payload, ...state.posts]
             };
         case DATA_GET:
             return {
@@ -38,7 +37,7 @@ export default function (state = initialState, action) {
         case GET_STORAGE:
             return {
                 ...state,
-                storage: action.payload,
+                posts: action.payload,
                 loading: false
             };
         case DATA_ERROR:
@@ -50,7 +49,7 @@ export default function (state = initialState, action) {
         case DATA_DELETE:
             return {
                 ...state,
-                storage: state.storage.filter(data => data._id !== action.payload)
+                posts: state.posts.filter(post => post._id !== action.payload)
             };
         default:
             return state;

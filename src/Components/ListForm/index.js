@@ -35,7 +35,7 @@ const NOTI_VALUES = {
 
 
 const PageListUpload = (props) => {
-
+    console.log(props.posts)
     const [values, setValues] = useState(INITIAL_STATE)
     const [noti, setNoti] = React.useState(NOTI_VALUES)
     const [open, setOpen] = React.useState(false)
@@ -114,8 +114,7 @@ const PageListUpload = (props) => {
 }
 
 const mapStateToProps = state => ({
-    storage: state.storage,
-    error: state.error
+    posts: state.posts
 });
 
 export default connect(mapStateToProps, { addList })(PageListUpload)
