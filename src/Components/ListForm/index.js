@@ -6,6 +6,8 @@ import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { makeStyles } from '@material-ui/core/styles';
 import { useHistory } from 'react-router-dom';
+import { connect } from 'react-redux'
+import { addList } from '../../actions/dataActions'
 import { URL_LIST } from '../../Requests'
 import './index.css'
 const formData = new FormData()
@@ -32,7 +34,7 @@ const NOTI_VALUES = {
 }
 
 
-const PageListUpload = () => {
+const PageListUpload = (props) => {
 
     const [values, setValues] = useState(INITIAL_STATE)
     const [noti, setNoti] = React.useState(NOTI_VALUES)
@@ -60,20 +62,7 @@ const PageListUpload = () => {
         e.preventDefault()
 
         try {
-            let response = await axios({
-                method: 'post',
-                url: URL_LIST,
-                data: formData,
-                config: { headers: { 'Content-Type': 'multipart/form-data' } }
-            })
-
-            if (response.data.err !== '') {
-                setNoti({ err: response.data.err })
-                setOpen(true)
-            } else {
-                setOpen(false)
-                history.push('/Page-list')
-            }
+            props.addList(formData)
 
         } catch (err) {
             setNoti({ err: err })
@@ -117,8 +106,6 @@ const PageListUpload = () => {
                         </Grid>
                     )
             }
-
-
         </>
     );
 
@@ -126,4 +113,9 @@ const PageListUpload = () => {
 
 }
 
-export default PageListUpload
+const mapStateToProps = state => ({
+    storage: state.storage,
+    error: state.error
+});
+
+export default connect(mapStateToProps, { addList })(PageListUpload)

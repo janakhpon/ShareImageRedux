@@ -19,6 +19,8 @@ import Snackbar from '@material-ui/core/Snackbar'
 import IconButton from '@material-ui/core/IconButton'
 import setAuthToken from '../utils'
 import PageListUpload from '../ListForm'
+import { connect } from 'react-redux'
+import { addList } from '../../actions/dataActions'
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -86,7 +88,7 @@ const USER_VALUES = {
     password: ""
 }
 
-export default function PageList() {
+const PageList = (props) => {
     const classes = useStyles()
     const [user, setUser] = React.useState(USER_VALUES)
     const [noti, setNoti] = React.useState(NOTI_VALUES)
@@ -276,3 +278,11 @@ export default function PageList() {
         </>
     );
 }
+
+const mapStateToProps = state => ({
+    storage: state.storage,
+    error: state.error
+});
+
+
+export default connect(mapStateToProps, { addList })(PageList)
