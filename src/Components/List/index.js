@@ -29,7 +29,7 @@ const useStyles = makeStyles(theme => ({
     },
     fabbtn: {
         margin: theme.spacing(4),
-        padding: theme.spacing(4),
+        textAlign: 'center',
     },
     Dialog: {
         background: '#002c4c',
