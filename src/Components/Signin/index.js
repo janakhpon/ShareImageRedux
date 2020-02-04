@@ -193,23 +193,9 @@ const PageSignin = (props) => {
         formData.set('password', password)
 
         try {
-            const cb = await axios({
-                method: 'post',
-                url: URL_USER_SIGNIN,
-                data: formData,
-                config: { headers: { 'Content-Type': 'multipart/form-data' } }
-            })
-            if (cb.data.err !== '') {
-                setNoti({ err: cb.data.err })
-            } else {
-                localStorage.setItem('token', cb.data.token);
-                setAuthToken(cb.data.token)
-                setSnackopen(false)
-                history.push('Page-list')
-            }
-
+            await props.userSignin(formData)
         } catch (err) {
-            setNoti({ err: err })
+
         }
     }
 
@@ -218,7 +204,7 @@ const PageSignin = (props) => {
     return (
         <Container component="main" maxWidth="xs">
             {
-                props.users.user.username ? (
+                props.users.user ? (
                     <Snackbar
                         anchorOrigin={{
                             vertical: 'bottom',

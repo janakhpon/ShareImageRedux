@@ -1,5 +1,4 @@
 import axios from 'axios'
-import { useHistory } from 'react-router-dom'
 import setAuthToken from '../Components/utils'
 import { URL_USER_SIGNUP, URL_USER_SIGNIN } from '../Requests'
 import { GET_USERS, GET_ME, USER_REMOVE, USER_RESET, USER_SIGNIN, USER_SIGNUP, USER_SIGNIN_ERROR, USER_SIGNUP_ERROR, SET_CURRENT_USER, USER_UPDATE, USER_UPDATE_ERROR } from './types'
@@ -46,6 +45,8 @@ export const userSignin = (userData) => async dispatch => {
             payload: cb.data.err
         })
     } else {
+        localStorage.setItem('token', cb.data.token);
+        setAuthToken(cb.data.token)
         dispatch({
             type: GET_ME,
             payload: cb.data.data
