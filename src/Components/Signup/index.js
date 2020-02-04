@@ -17,15 +17,13 @@ import NativeSelect from '@material-ui/core/NativeSelect'
 import InputLabel from '@material-ui/core/InputLabel'
 import { useHistory } from 'react-router-dom'
 import { withStyles } from "@material-ui/styles"
-import axios from 'axios'
-import { URL_USER_SIGNUP } from '../../Requests'
 import CloseIcon from '@material-ui/icons/Close'
 import SnackbarContent from '@material-ui/core/SnackbarContent'
 import Snackbar from '@material-ui/core/Snackbar'
 import IconButton from '@material-ui/core/IconButton'
 import PageSignin from '../Signin'
 import { connect } from 'react-redux'
-import { userSignup, getCurrentUser } from '../../actions/userActions'
+import { userSignup } from '../../actions/userActions'
 
 const NavLink = styled(Link)`
     text-decoration: none;
@@ -192,9 +190,7 @@ const PageSignup = (props) => {
         formData.set('position', position)
         try {
             await props.userSignup(formData)
-
         } catch (err) {
-
         }
 
     }
@@ -203,7 +199,7 @@ const PageSignup = (props) => {
         setSelect(event.target.value)
     }
 
-    if (props.users.user != null)  return <PageSignin />
+    if (props.users.user != null) return <PageSignin />
 
     return (
         <Container component="main" maxWidth="xs">
