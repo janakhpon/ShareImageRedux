@@ -24,6 +24,11 @@ export default function (state = initialState, action) {
                 ...state,
                 loading: true
             };
+        case DATA_ADD:
+            return {
+                ...state,
+                storage: [action.payload, ...state.storage]
+            };
         case DATA_GET:
             return {
                 ...state,
@@ -41,6 +46,11 @@ export default function (state = initialState, action) {
                 ...state,
                 data: action.payload,
                 loading: false
+            };
+        case DATA_DELETE:
+            return {
+                ...state,
+                storage: state.storage.filter(data => data._id !== action.payload)
             };
         default:
             return state;
