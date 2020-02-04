@@ -204,7 +204,7 @@ const PageSignup = (props) => {
     return (
         <Container component="main" maxWidth="xs">
             {
-                props.users.error ? (
+                props.users.error != '' && props.users.error != null ? (
                     <Snackbar
                         anchorOrigin={{
                             vertical: 'bottom',

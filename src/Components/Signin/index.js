@@ -20,9 +20,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import SnackbarContent from '@material-ui/core/SnackbarContent';
 import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
-import axios from 'axios'
-import { URL_USER_SIGNIN } from '../../Requests'
-import setAuthToken from '../utils'
+import PageList from '../List'
 import { connect } from 'react-redux'
 import { userSignin } from '../../actions/userActions'
 
@@ -201,6 +199,8 @@ const PageSignin = (props) => {
 
     const CustomCheckbox = withStyles(checkBoxStyles)(Checkbox);
 
+    if (props.users.error === '') return <PageList />
+
     return (
         <Container component="main" maxWidth="xs">
             {
@@ -220,6 +220,34 @@ const PageSignin = (props) => {
                             message={
                                 <span id="client-snackbar" className={classes.message}>
                                     {props.users.user.username} is registered
+                                </span>
+                            }
+                            action={[
+                                <IconButton key="close" aria-label="close" color="inherit" onClick={onClose}>
+                                    <CloseIcon className={classes.icon} />
+                                </IconButton>,
+                            ]}
+                        />
+                    </Snackbar>
+                ) : ('')
+            }
+            {
+                props.users.error != '' && props.users.error != null ? (
+                    <Snackbar
+                        anchorOrigin={{
+                            vertical: 'bottom',
+                            horizontal: 'right',
+                        }}
+                        open={snackopen}
+                        onClose={onClose}
+                        autoHideDuration={2000}
+                    >
+                        <SnackbarContent
+                            className={classes.notibox}
+                            aria-describedby="client-snackbar"
+                            message={
+                                <span id="client-snackbar" className={classes.message}>
+                                    {props.users.error}
                                 </span>
                             }
                             action={[
