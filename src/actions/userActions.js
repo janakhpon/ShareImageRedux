@@ -48,8 +48,8 @@ export const userSignin = (userData) => async dispatch => {
         localStorage.setItem('token', cb.data.token);
         setAuthToken(cb.data.token)
         dispatch({
-            type: GET_ME,
-            payload: cb.data.data
+            type: USER_SIGNUP_ERROR,
+            payload: cb.data.err
         })
     }
 }
