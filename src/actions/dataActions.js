@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { URL_LIST } from '../Requests'
-import { DATA_ADD } from './types'
+import { DATA_ADD, DATA_ERROR } from './types'
 
 
 //USER_REGISTER
@@ -11,22 +11,16 @@ export const addList = (postData) => async dispatch => {
         data: postData,
         config: { headers: { 'Content-Type': 'multipart/form-data' } }
     })
-    console.log(cb)
-    // if (cb.data.err !== '') {
-    //     dispatch({
-    //         type: USER_SIGNUP_ERROR,
-    //         payload: cb.data.err
-    //     })
-    // } else {
-    //     let { _id, username, email, phone } = cb.data.data
-    //     localStorage.setItem('_id', _id)
-    //     localStorage.setItem('username', username)
-    //     localStorage.setItem('email', email)
-    //     localStorage.setItem('phone', phone)
-    //     dispatch({
-    //         type: GET_ME,
-    //         payload: cb.data.data
-    //     })
-    // }
+    if (cb.data.err !== '') {
+        dispatch({
+            type: DATA_ERROR,
+            payload: cb.data.err
+        })
+    } else {
+        dispatch({
+            type: DATA_ADD,
+            payload: cb.data.data
+        })
+    }
 }
 

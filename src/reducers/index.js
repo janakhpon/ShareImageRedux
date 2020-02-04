@@ -4,5 +4,5 @@ import dataReducers from './dataReducers'
 
 export default combineReducers({
     users: userReducers,
-    storage: dataReducers
+    posts: dataReducers
 });

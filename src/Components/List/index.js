@@ -89,6 +89,9 @@ const USER_VALUES = {
 }
 
 const PageList = (props) => {
+    console.log("LIST")
+    console.log(props.posts)
+    
     const classes = useStyles()
     const [user, setUser] = React.useState(USER_VALUES)
     const [noti, setNoti] = React.useState(NOTI_VALUES)
@@ -280,8 +283,7 @@ const PageList = (props) => {
 }
 
 const mapStateToProps = state => ({
-    storage: state.storage,
-    error: state.error
+    posts: state.posts
 });
 
 
