@@ -17,6 +17,8 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
 import { useHistory } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { deleteListItem, updateListItem } from '../../actions/dataActions'
 import { MAIN_URL, URL_LIST_REMOVE, URL_LIST_ID } from '../../Requests'
 import './index.css'
 const formData = new FormData()
@@ -102,7 +104,10 @@ const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function PageListItem({ singleimg, user }) {
+const PageListItem = (props) => {
+    let { singleimg, user } = props
+    console.log("List Item")
+    console.log(props)
     const { _id, date, description, image, mimetype } = singleimg
     const { username, position } = user
 
@@ -176,17 +181,7 @@ export default function PageListItem({ singleimg, user }) {
         let url = `${URL_LIST_REMOVE}${_id}`
 
         try {
-            const cb = await axios({
-                method: 'delete',
-                url: url,
-                config: { headers: { 'Content-Type': 'multipart/form-data' } }
-            })
-            if (cb.data.err !== '') {
-                setNoti({ err: cb.data.err })
-            } else {
-                history.push('/Page-list')
-            }
-
+            props.deleteListItem(url)
         } catch (err) {
             setNoti({ err: err })
         }
@@ -323,3 +318,10 @@ export default function PageListItem({ singleimg, user }) {
         </div>
     );
 }
+
+
+const mapStateToProps = state => ({
+    lists: state.posts
+})
+
+export default connect(mapStateToProps, { updateListItem, deleteListItem })(PageListItem)
