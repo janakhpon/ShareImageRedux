@@ -156,18 +156,7 @@ const PageListItem = (props) => {
         let url = `${URL_LIST_ID}${_id}`
 
         try {
-            let response = await axios({
-                method: 'post',
-                url: url,
-                data: formData,
-                config: { headers: { 'Content-Type': 'multipart/form-data' } }
-            })
-
-            if (response.data.err !== '') {
-                setNoti({ err: response.data.err })
-            } else {
-                history.push('/Page-list')
-            }
+            props.updateListItem(formData, url)
 
         } catch (err) {
             setNoti({ err: err })
@@ -181,7 +170,7 @@ const PageListItem = (props) => {
         let url = `${URL_LIST_REMOVE}${_id}`
 
         try {
-            props.deleteListItem(url)
+            props.deleteListItem(url, _id)
         } catch (err) {
             setNoti({ err: err })
         }
