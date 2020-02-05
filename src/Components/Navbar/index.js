@@ -119,11 +119,10 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 const PageNav = (props) => {
-    const { user, noti, count } = props
+
     let username = props.users.user&& props.users.user.username ? props.users.user.username : "unknown"
     let position = props.users.user&& props.users.user.position ? props.users.user.position : "unknown"
     let email = props.users.user&& props.users.user.email ? props.users.user.email : "unknown"
-    const { err } = noti
     const [open, setOpen] = React.useState(false);
 
     console.log('NAVBAR')
@@ -339,7 +338,7 @@ const PageNav = (props) => {
     return (
         <div className={classes.grow}>
             {
-                err ? (
+                username === 'unknown' ? (
                     <AppBar position="static" style={{ background: 'transparent', boxShadow: 'none' }}>
                         <Toolbar>
                             <div className={classes.grow} />
@@ -406,7 +405,7 @@ const PageNav = (props) => {
                     )
             }
             {
-                err ? (
+                 username === 'unknown' ? (
                     renderMobileMenu
                 ) :
                     (
@@ -414,7 +413,7 @@ const PageNav = (props) => {
                     )
             }
             {
-                err ? (
+                 username === 'unknown' ? (
                     renderMenu
                 ) :
                     (

@@ -81,21 +81,14 @@ const NOTI_VALUES = {
     err: ""
 }
 
-const USER_VALUES = {
-    id: "",
-    username: "",
-    email: "",
-    position: "",
-    password: ""
-}
 
 const PageList = (props) => {
     console.log("LIST")
     console.log(props.posts)
     console.log(props.users)
 
+    
     const classes = useStyles()
-    const [user, setUser] = React.useState(USER_VALUES)
     const [noti, setNoti] = React.useState(NOTI_VALUES)
     const [imgdata, setImgdata] = React.useState([])
     const [open, setOpen] = React.useState(false)
