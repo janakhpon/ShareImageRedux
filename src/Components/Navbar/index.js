@@ -120,14 +120,11 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 const PageNav = (props) => {
 
-    let username = props.users.user&& props.users.user.username ? props.users.user.username : "unknown"
-    let position = props.users.user&& props.users.user.position ? props.users.user.position : "unknown"
-    let email = props.users.user&& props.users.user.email ? props.users.user.email : "unknown"
-    const [open, setOpen] = React.useState(false);
+    let username = props.users.user && props.users.user.username ? props.users.user.username : "unknown"
+    let position = props.users.user && props.users.user.position ? props.users.user.position : "unknown"
+    let email = props.users.user && props.users.user.email ? props.users.user.email : "unknown"
+    const [open, setOpen] = React.useState(false)
 
-    console.log('NAVBAR')
-    console.log(props.posts)
-    console.log(props.users.user)
     const handleClickOpen = () => {
         setOpen(true);
     };
@@ -163,7 +160,7 @@ const PageNav = (props) => {
 
     const lockMeOut = (e) => {
         localStorage.clear();
-        history.push('/Page-signin')
+        history.push(`${routes.SIGNIN}`)
     }
 
     const menuId = 'primary-search-account-menu';
@@ -277,7 +274,7 @@ const PageNav = (props) => {
                     startIcon={<LockIcon />}
                     onClick={lockMeOut}
                 >
-                    SIGNOUT
+                    RESET
         </Button>
             </MenuItem>
         </Menu>
@@ -329,8 +326,8 @@ const PageNav = (props) => {
                     startIcon={<LockIcon />}
                     onClick={lockMeOut}
                 >
-                    SIGNOUT
-            </Button>
+                    RESET
+        </Button>
             </MenuItem>
         </Menu>
     );
@@ -405,7 +402,7 @@ const PageNav = (props) => {
                     )
             }
             {
-                 username === 'unknown' ? (
+                username === 'unknown' ? (
                     renderMobileMenu
                 ) :
                     (
@@ -413,7 +410,7 @@ const PageNav = (props) => {
                     )
             }
             {
-                 username === 'unknown' ? (
+                username === 'unknown' ? (
                     renderMenu
                 ) :
                     (
