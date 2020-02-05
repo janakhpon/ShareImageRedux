@@ -20,7 +20,7 @@ import IconButton from '@material-ui/core/IconButton'
 import setAuthToken from '../utils'
 import PageListUpload from '../ListForm'
 import { connect } from 'react-redux'
-import { addList } from '../../actions/dataActions'
+import { addList, getList } from '../../actions/dataActions'
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -91,7 +91,7 @@ const USER_VALUES = {
 const PageList = (props) => {
     console.log("LIST")
     console.log(props.posts)
-    
+
     const classes = useStyles()
     const [user, setUser] = React.useState(USER_VALUES)
     const [noti, setNoti] = React.useState(NOTI_VALUES)
@@ -102,34 +102,24 @@ const PageList = (props) => {
     const fullScreen = useMediaQuery(theme.breakpoints.down('sm'))
 
 
-    useEffect(() => {
-        let isSubscribed = true
-        const getUser = async () => {
-            try {
-                let token = localStorage.getItem('token')
-                setAuthToken(token)
-                let cb = await axios.get(URL_ME)
-                if (isSubscribed) {
-                    setUser({
-                        id: cb.data.data.id,
-                        username: cb.data.data.username,
-                        email: cb.data.data.email,
-                        phone: cb.data.data.phone,
-                        position: cb.data.data.position
-                    })
-                    setNoti({ msg: `Login as ${cb.data.data.username}` })
-                }
-            } catch (err) {
-                setNoti({ err: "session expired! Login again" })
-            }
-        }
-        try {
-            getUser()
-        } catch (err) {
-            setNoti({ err: "session expired! Login again" })
-        }
-        return () => isSubscribed = false
-    }, [])
+    // useEffect(() => {
+    //     let isSubscribed = true
+    //     const getUser = async () => {
+    //         try {
+    //             let token = localStorage.getItem('token')
+    //             setAuthToken(token)
+    //             await props.getList()
+    //         } catch (err) {
+    //             setNoti({ err: "session expired! Login again" })
+    //         }
+    //     }
+    //     try {
+    //         getUser()
+    //     } catch (err) {
+    //         setNoti({ err: "session expired! Login again" })
+    //     }
+    //     return () => isSubscribed = false
+    // }, [])
 
 
     useEffect(() => {
@@ -138,11 +128,7 @@ const PageList = (props) => {
             try {
                 let token = localStorage.getItem('token')
                 setAuthToken(token)
-                let cb = await axios.get(URL_PRIVATE_LISTS)
-                if (isSubscribed) {
-                    setImgdata(cb.data.data)
-
-                }
+                await props.getList()
             } catch (err) {
 
             }
@@ -287,4 +273,4 @@ const mapStateToProps = state => ({
 });
 
 
-export default connect(mapStateToProps, { addList })(PageList)
+export default connect(mapStateToProps, { addList, getList })(PageList)
