@@ -1,6 +1,6 @@
 import axios from 'axios'
 import setAuthToken from '../Components/utils'
-import { URL_USER_SIGNUP, URL_USER_SIGNIN } from '../Requests'
+import { URL_USER_SIGNUP, URL_USER_SIGNIN, URL_ME } from '../Requests'
 import { GET_USERS, GET_ME, USER_REMOVE, USER_RESET, USER_SIGNIN, USER_SIGNUP, USER_SIGNIN_ERROR, USER_SIGNUP_ERROR, SET_CURRENT_USER, USER_UPDATE, USER_UPDATE_ERROR } from './types'
 
 
@@ -54,6 +54,26 @@ export const userSignin = (userData) => async dispatch => {
     }
 }
 
+//GET USER
+export const getMe = () => async dispatch => {
+    let cb = await axios({
+        method: 'get',
+        url: URL_ME,
+        config: { headers: { 'Content-Type': 'multipart/form-data' } }
+    })
+    console.log(cb)
+    if (cb.data.err !== '') {
+        dispatch({
+            type: USER_SIGNUP_ERROR,
+            payload: cb.data.err
+        })
+    } else {
+        dispatch({
+            type: GET_ME,
+            payload: cb.data.data
+        })
+    }
+}
 
 //USER_REGISTER
 export const setCurrentUser = resdata => {

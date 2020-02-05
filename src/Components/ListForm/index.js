@@ -68,7 +68,6 @@ const PageListUpload = (props) => {
             setNoti({ err: err })
         }
 
-
     }
 
     return (

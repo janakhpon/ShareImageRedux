@@ -21,6 +21,7 @@ import setAuthToken from '../utils'
 import PageListUpload from '../ListForm'
 import { connect } from 'react-redux'
 import { addList, getList } from '../../actions/dataActions'
+import { getMe } from '../../actions/userActions'
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -91,6 +92,7 @@ const USER_VALUES = {
 const PageList = (props) => {
     console.log("LIST")
     console.log(props.posts)
+    console.log(props.users)
 
     const classes = useStyles()
     const [user, setUser] = React.useState(USER_VALUES)
@@ -102,24 +104,22 @@ const PageList = (props) => {
     const fullScreen = useMediaQuery(theme.breakpoints.down('sm'))
 
 
-    // useEffect(() => {
-    //     let isSubscribed = true
-    //     const getUser = async () => {
-    //         try {
-    //             let token = localStorage.getItem('token')
-    //             setAuthToken(token)
-    //             await props.getList()
-    //         } catch (err) {
-    //             setNoti({ err: "session expired! Login again" })
-    //         }
-    //     }
-    //     try {
-    //         getUser()
-    //     } catch (err) {
-    //         setNoti({ err: "session expired! Login again" })
-    //     }
-    //     return () => isSubscribed = false
-    // }, [])
+    useEffect(() => {
+        let isSubscribed = true
+        const getUser = async () => {
+            try {
+                await props.getMe()
+            } catch (err) {
+                setNoti({ err: "session expired! Login again" })
+            }
+        }
+        try {
+            getUser()
+        } catch (err) {
+            setNoti({ err: "session expired! Login again" })
+        }
+        return () => isSubscribed = false
+    }, [])
 
 
     useEffect(() => {
@@ -249,9 +249,9 @@ const PageList = (props) => {
                     </Grid>
 
                     {
-                        imgdata ? (
-                            imgdata.map((single, key) => {
-                                return <PageListItem singleimg={single} key={key} user={user} />
+                        props.posts ? (
+                            props.posts.posts.map((single, key) => {
+                                return <p>${single._id}</p>
                             })
                         ) :
                             ('')
@@ -269,8 +269,9 @@ const PageList = (props) => {
 }
 
 const mapStateToProps = state => ({
-    posts: state.posts
+    posts: state.posts,
+    users: state.users
 });
 
 
-export default connect(mapStateToProps, { addList, getList })(PageList)
+export default connect(mapStateToProps, { addList, getList, getMe })(PageList)
