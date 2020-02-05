@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { URL_LIST, URL_PRIVATE_LISTS, URL_LIST_ID } from '../Requests'
-import { DATA_ADD, DATA_ERROR, GET_STORAGE } from './types'
+import { DATA_ADD, DATA_ERROR, GET_STORAGE, DATA_SUCCESS } from './types'
 
 
 //ADD DATA TO LIST
@@ -46,9 +46,10 @@ export const getList = () => async dispatch => {
 
 //UPDATE LIST ITEM DATA
 export const updateListItem = (postData) => async dispatch => {
+    let url = `${URL_LIST_ID}${postData._id}`
     let cb = await axios({
         method: 'post',
-        url: URL_LIST,
+        url: url,
         data: postData,
         config: { headers: { 'Content-Type': 'multipart/form-data' } }
     })
@@ -59,8 +60,30 @@ export const updateListItem = (postData) => async dispatch => {
         })
     } else {
         dispatch({
-            type: DATA_ADD,
+            type: DATA_SUCCESS,
             payload: cb.data.data
+        })
+    }
+}
+
+
+//DELETE LIST ITEM
+export const deleteListItem = (url) => async dispatch => {
+    let cb = await axios({
+        method: 'delete',
+        url: url,
+        config: { headers: { 'Content-Type': 'multipart/form-data' } }
+    })
+    console.log(cb)
+    if (cb.data.err !== '') {
+        dispatch({
+            type: DATA_ERROR,
+            payload: cb.data.err
+        })
+    } else {
+        dispatch({
+            type: DATA_ADD,
+            payload: cb.data.msg
         })
     }
 }
