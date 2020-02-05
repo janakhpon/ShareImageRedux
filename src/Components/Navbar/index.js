@@ -120,12 +120,15 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 const PageNav = (props) => {
     const { user, noti, count } = props
-    const { username, position, email } = user
+    let username = props.users.user&& props.users.user.username ? props.users.user.username : "unknown"
+    let position = props.users.user&& props.users.user.position ? props.users.user.position : "unknown"
+    let email = props.users.user&& props.users.user.email ? props.users.user.email : "unknown"
     const { err } = noti
     const [open, setOpen] = React.useState(false);
 
     console.log('NAVBAR')
-    console.log(props.posts.posts.length)
+    console.log(props.posts)
+    console.log(props.users.user)
     const handleClickOpen = () => {
         setOpen(true);
     };
@@ -448,7 +451,8 @@ const PageNav = (props) => {
 }
 
 const mapStateToProps = state => ({
-    posts: state.posts
+    posts: state.posts,
+    users: state.users
 })
 
 export default connect(mapStateToProps)(PageNav)
