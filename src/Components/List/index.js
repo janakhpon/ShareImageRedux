@@ -11,8 +11,6 @@ import DialogContent from '@material-ui/core/DialogContent'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
 import { useTheme } from '@material-ui/core/styles'
-import { URL_ME, URL_PRIVATE_LISTS } from '../../Requests'
-import axios from 'axios'
 import CloseIcon from '@material-ui/icons/Close'
 import SnackbarContent from '@material-ui/core/SnackbarContent'
 import Snackbar from '@material-ui/core/Snackbar'
@@ -75,23 +73,11 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-
-const NOTI_VALUES = {
-    msg: '',
-    err: ""
-}
-
-
 const PageList = (props) => {
-    console.log("LIST")
-    console.log(props.posts)
-    console.log(props.users)
-
-    let err = props.posts.posts&& props.posts.posts.error
-    let msg = props.posts.posts&& props.posts.posts.msg
-
+    let username = props.users.user && props.users.user.username ? props.users.user.username : "unknown"
+    let err = props.posts.posts && props.posts.posts.error
+    let msg = props.posts.posts && props.posts.posts.msg
     const classes = useStyles()
-    const [noti, setNoti] = React.useState(NOTI_VALUES)
     const [open, setOpen] = React.useState(false)
     const [snackopen, setSnackopen] = React.useState(true)
     const theme = useTheme()
@@ -202,18 +188,25 @@ const PageList = (props) => {
             }
             <Grid container alignContent="center" justify="center">
                 <Grid item xs={12} sm={12} md={10} lg={10} xl={8}>
-                    <Grid container
-                        direction="row"
-                        justify="flex-start"
-                        alignItems="flex-start">
-                        <Grid item xs={2} sm={2} md={2} lg={2} xl={2}>
-                            <Fab size="small" color="primary" aria-label="add" className={classes.fabbtn} onClick={handleClickOpen}>
-                                <AddIcon />
-                            </Fab>
-                        </Grid>
-                        <Grid item xs={8} sm={8} md={9} lg={8} xl={8}>
-                        </Grid>
-                    </Grid>
+                    {
+                        username != 'unknown' ? (
+                            <Grid container
+                                direction="row"
+                                justify="flex-start"
+                                alignItems="flex-start">
+                                <Grid item xs={2} sm={2} md={2} lg={2} xl={2}>
+                                    <Fab size="small" color="primary" aria-label="add" className={classes.fabbtn} onClick={handleClickOpen}>
+                                        <AddIcon />
+                                    </Fab>
+                                </Grid>
+                                <Grid item xs={8} sm={8} md={9} lg={8} xl={8}>
+                                </Grid>
+                            </Grid>
+                        ) :
+                            (
+                                ''
+                            )
+                    }
                     <Grid container direction="row" justify="center" alignitems="center">
                         <Grid item xs={12}>
                             <Dialog
@@ -250,7 +243,7 @@ const PageList = (props) => {
                                     phone: props.users.user && props.users.user.phone,
                                     position: props.users.user && props.users.user.position
                                 }
-                                return <PageListItem singleimg={single ? single : null } key={key} user={user ? user : null} />
+                                return <PageListItem singleimg={single ? single : null} key={key} user={user ? user : null} />
                             })
                         ) :
                             ('')
