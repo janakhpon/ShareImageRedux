@@ -19,6 +19,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
 import { Link, useHistory } from 'react-router-dom'
 import styled from 'styled-components'
+import { connect } from 'react-redux'
 import * as routes from '../../Routes'
 
 const useStyles = makeStyles(theme => ({
@@ -117,13 +118,14 @@ const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function PageNav({ user, noti, count }) {
-
+const PageNav = (props) => {
+    const { user, noti, count } = props
     const { username, position, email } = user
     const { err } = noti
-    const { notilength } = count
     const [open, setOpen] = React.useState(false);
 
+    console.log('NAVBAR')
+    console.log(props.posts.posts.length)
     const handleClickOpen = () => {
         setOpen(true);
     };
@@ -291,8 +293,8 @@ export default function PageNav({ user, noti, count }) {
             onClose={handleMobileMenuClose}
         >
             <MenuItem>
-                <IconButton aria-label={`${notilength} new notifications`} color="inherit">
-                    <Badge badgeContent={notilength} color="primary">
+                <IconButton aria-label={`${props.posts.posts ? props.posts.posts.length : 0} new notifications`} color="inherit">
+                    <Badge badgeContent={props.posts.posts ? props.posts.posts.length : 0} color="primary">
                         <NotificationsIcon />
                     </Badge>
                 </IconButton>
@@ -369,8 +371,8 @@ export default function PageNav({ user, noti, count }) {
                             <Toolbar>
                                 <div className={classes.grow} />
                                 <div className={classes.sectionDesktop}>
-                                    <IconButton aria-label={`${notilength} new notifications`} color="inherit">
-                                        <Badge badgeContent={notilength} color="primary">
+                                    <IconButton aria-label={`${props.posts.posts ? props.posts.posts.length : 0} new notifications`} color="inherit">
+                                        <Badge badgeContent={props.posts.posts ? props.posts.posts.length : 0} color="primary">
                                             <NotificationsIcon />
                                         </Badge>
                                     </IconButton>
@@ -444,3 +446,9 @@ export default function PageNav({ user, noti, count }) {
         </div>
     );
 }
+
+const mapStateToProps = state => ({
+    posts: state.posts
+})
+
+export default connect(mapStateToProps)(PageNav)
