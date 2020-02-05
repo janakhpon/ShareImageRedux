@@ -92,7 +92,7 @@ const USER_VALUES = {
 const PageList = (props) => {
     console.log("LIST")
     console.log(props.posts)
-    console.log(props.users)
+    console.log(props.users.user)
 
     const classes = useStyles()
     const [user, setUser] = React.useState(USER_VALUES)
@@ -251,7 +251,8 @@ const PageList = (props) => {
                     {
                         props.posts ? (
                             props.posts.posts.map((single, key) => {
-                                return <p>${single._id}</p>
+                                const user = props.users.user
+                                return <p>${single._id} and ${user.id}</p>
                             })
                         ) :
                             ('')
