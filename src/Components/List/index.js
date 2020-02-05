@@ -87,10 +87,11 @@ const PageList = (props) => {
     console.log(props.posts)
     console.log(props.users)
 
-    
+    let err = props.posts.posts&& props.posts.posts.error
+    let msg = props.posts.posts&& props.posts.posts.msg
+
     const classes = useStyles()
     const [noti, setNoti] = React.useState(NOTI_VALUES)
-    const [imgdata, setImgdata] = React.useState([])
     const [open, setOpen] = React.useState(false)
     const [snackopen, setSnackopen] = React.useState(true)
     const theme = useTheme()
@@ -103,13 +104,11 @@ const PageList = (props) => {
             try {
                 await props.getMe()
             } catch (err) {
-                setNoti({ err: "session expired! Login again" })
             }
         }
         try {
             getUser()
         } catch (err) {
-            setNoti({ err: "session expired! Login again" })
         }
         return () => isSubscribed = false
     }, [])
@@ -149,7 +148,7 @@ const PageList = (props) => {
     return (
         <>
             {
-                noti.err ? (
+                err ? (
                     <Snackbar
                         anchorOrigin={{
                             vertical: 'bottom',
@@ -164,7 +163,7 @@ const PageList = (props) => {
                             aria-describedby="client-snackbar"
                             message={
                                 <span id="client-snackbar" className={classes.message}>
-                                    {noti.err}
+                                    {err}
                                 </span>
                             }
                             action={[
@@ -189,7 +188,7 @@ const PageList = (props) => {
                                 aria-describedby="client-snackbar"
                                 message={
                                     <span id="client-snackbar" className={classes.message}>
-                                        {noti.msg}
+                                        {msg}
                                     </span>
                                 }
                                 action={[
@@ -255,9 +254,6 @@ const PageList = (props) => {
                             })
                         ) :
                             ('')
-                    }
-                    {
-                        localStorage.setItem('noti', imgdata.length)
                     }
                 </Grid>
             </Grid>
