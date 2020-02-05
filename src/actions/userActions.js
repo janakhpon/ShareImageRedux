@@ -61,7 +61,6 @@ export const getMe = () => async dispatch => {
         url: URL_ME,
         config: { headers: { 'Content-Type': 'multipart/form-data' } }
     })
-    console.log(cb)
     if (cb.data.err !== '') {
         dispatch({
             type: USER_SIGNUP_ERROR,

@@ -92,7 +92,7 @@ const USER_VALUES = {
 const PageList = (props) => {
     console.log("LIST")
     console.log(props.posts)
-    console.log(props.users.user)
+    console.log(props.users)
 
     const classes = useStyles()
     const [user, setUser] = React.useState(USER_VALUES)
@@ -251,8 +251,14 @@ const PageList = (props) => {
                     {
                         props.posts ? (
                             props.posts.posts.map((single, key) => {
-                                const user = props.users.user
-                                return <p>${single._id} and ${user.id}</p>
+                                let user = {
+                                    _id: props.users.user && props.users.user.id,
+                                    username: props.users.user && props.users.user.username,
+                                    email: props.users.user && props.users.user.email,
+                                    phone: props.users.user && props.users.user.phone,
+                                    position: props.users.user && props.users.user.position
+                                }
+                                return <PageListItem singleimg={single ? single : null } key={key} user={user ? user : null} />
                             })
                         ) :
                             ('')
