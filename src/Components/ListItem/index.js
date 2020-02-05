@@ -238,7 +238,7 @@ export default function PageListItem({ singleimg, user }) {
                     }
                 }}
             >
-                <DialogTitle id="alert-dialog-slide-title">{username}</DialogTitle>
+                <DialogTitle id="alert-dialog-slide-title">{username ? username : 'unknown'}</DialogTitle>
                 <DialogContent className={classes.Dialogcontent}>
                     <Grid container direction="row" justify="center" alignitems="center" spacing={2}>
                         <Grid item xs={12} className="grid">
@@ -270,7 +270,7 @@ export default function PageListItem({ singleimg, user }) {
                 <Grid container spacing={2}>
                     <Grid item>
                         <ButtonBase className={classes.image}>
-                            <img className={classes.img} alt="complex" src={`${MAIN_URL}/${image}`} />
+                            <img className={classes.img} alt="complex" src={`${MAIN_URL}/${image ? image : 'imgnotfound'}`} />
                         </ButtonBase>
                     </Grid>
                     <Grid item xs={12} sm container>
