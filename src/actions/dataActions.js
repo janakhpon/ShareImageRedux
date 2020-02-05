@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { URL_LIST, URL_PRIVATE_LISTS, URL_LIST_ID } from '../Requests'
-import { DATA_ADD, DATA_ERROR, GET_STORAGE, DATA_SUCCESS } from './types'
+import { DATA_ADD, DATA_ERROR, GET_STORAGE, DATA_SUCCESS, DATA_DELETE } from './types'
 
 
 //ADD DATA TO LIST
@@ -45,8 +45,7 @@ export const getList = () => async dispatch => {
 }
 
 //UPDATE LIST ITEM DATA
-export const updateListItem = (postData) => async dispatch => {
-    let url = `${URL_LIST_ID}${postData._id}`
+export const updateListItem = (postData, url) => async dispatch => {
     let cb = await axios({
         method: 'post',
         url: url,
@@ -68,15 +67,15 @@ export const updateListItem = (postData) => async dispatch => {
 
 
 //DELETE LIST ITEM
-export const deleteListItem = (url) => async dispatch => {
+export const deleteListItem = (url, _id) => async dispatch => {
     let cb = await axios({
         method: 'delete',
         url: url,
         config: { headers: { 'Content-Type': 'multipart/form-data' } }
     })
     dispatch({
-        type: DATA_SUCCESS,
-        payload: cb.data.msg
+        type: DATA_DELETE,
+        payload: _id
     })
     if (cb.data.err !== '') {
         dispatch({
