@@ -321,7 +321,8 @@ const PageListItem = (props) => {
 
 
 const mapStateToProps = state => ({
-    lists: state.posts
+    posts: state.posts,
+    users: state.users,
 })
 
 export default connect(mapStateToProps, { updateListItem, deleteListItem })(PageListItem)

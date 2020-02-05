@@ -5,7 +5,8 @@ import {
     DATA_GET,
     GET_STORAGE,
     DATA_UPDATE,
-    DATA_LOADING
+    DATA_LOADING,
+    DATA_SUCCESS
 } from '../actions/types'
 
 
@@ -13,6 +14,7 @@ const initialState = {
     posts: [],
     post: {},
     error: null,
+    msg: null,
     loading: false
 }
 
@@ -31,7 +33,7 @@ export default function (state = initialState, action) {
         case DATA_GET:
             return {
                 ...state,
-                data: action.payload,
+                post: action.payload,
                 loading: false
             };
         case GET_STORAGE:
@@ -43,7 +45,13 @@ export default function (state = initialState, action) {
         case DATA_ERROR:
             return {
                 ...state,
-                data: action.payload,
+                error: action.payload,
+                loading: false
+            };
+        case DATA_SUCCESS:
+            return {
+                ...state,
+                msg: action.payload,
                 loading: false
             };
         case DATA_DELETE:

@@ -74,16 +74,14 @@ export const deleteListItem = (url) => async dispatch => {
         url: url,
         config: { headers: { 'Content-Type': 'multipart/form-data' } }
     })
-    console.log(cb)
+    dispatch({
+        type: DATA_SUCCESS,
+        payload: cb.data.msg
+    })
     if (cb.data.err !== '') {
         dispatch({
             type: DATA_ERROR,
             payload: cb.data.err
-        })
-    } else {
-        dispatch({
-            type: DATA_ADD,
-            payload: cb.data.msg
         })
     }
 }
