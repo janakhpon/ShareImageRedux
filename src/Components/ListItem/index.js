@@ -108,6 +108,8 @@ const PageListItem = (props) => {
     let { singleimg, user } = props
     console.log("List Item")
     console.log(props)
+    let err = props.posts.posts&& props.posts.posts.error
+    let msg = props.posts.posts&& props.posts.posts.msg
     const { _id, date, description, image, mimetype } = singleimg
     const { username, position } = user
 
@@ -180,7 +182,7 @@ const PageListItem = (props) => {
     return (
         <div className={classes.root}>
             {
-                noti.err ? (
+                err ? (
                     <Snackbar
                         anchorOrigin={{
                             vertical: 'bottom',
@@ -201,7 +203,7 @@ const PageListItem = (props) => {
                             action={[
                                 <IconButton key="close" aria-label="close" color="inherit" onClick={onClose}>
                                     <CloseIcon className={classes.icon} />
-                                </IconButton>,
+                                </IconButton>
                             ]}
                         />
                     </Snackbar>
