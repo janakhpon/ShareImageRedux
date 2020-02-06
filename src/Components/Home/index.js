@@ -17,10 +17,8 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-
 export default function PageHome() {
     const classes = useStyles();
-
     return (
         <div className={classes.root}>
             <Typography variant="h2" component="h3" gutterBottom align="center">

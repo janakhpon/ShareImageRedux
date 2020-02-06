@@ -167,8 +167,6 @@ const PageSignin = (props) => {
     const [values, setValues] = React.useState(INITIAL_VALUES)
     const [noti, setNoti] = React.useState(NOTI_VALUES)
     const [snackopen, setSnackopen] = React.useState(true)
-
-
     const classes = useStyles();
     const handleChange = (e) => {
         e.persist();
@@ -253,7 +251,7 @@ const PageSignin = (props) => {
                             action={[
                                 <IconButton key="close" aria-label="close" color="inherit" onClick={onClose}>
                                     <CloseIcon className={classes.icon} />
-                                </IconButton>,
+                                </IconButton>
                             ]}
                         />
                     </Snackbar>
@@ -292,13 +290,10 @@ const PageSignin = (props) => {
                         id="password"
                         autoComplete="current-password"
                     />
-
                     <FormControlLabel
                         control={<CustomCheckbox value="remember" color="primary" />}
                         label="Remember me"
                     />
-
-
                     <Button
                         type="submit"
                         fullWidth
