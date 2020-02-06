@@ -103,7 +103,6 @@ const useStyles = makeStyles(theme => ({
         }
     }
 }))
-
 const styles = {
     underline: {
         // normal style
@@ -129,10 +128,6 @@ const styles = {
         }
     },
 }
-
-
-
-
 const INITIAL_VALUES = {
     name: "",
     email: "",
@@ -151,10 +146,7 @@ const CustomTextField = withStyles(styles)(props => {
     return <TextField InputProps={{ className: classes.underline }} InputLabelProps={{ className: classes.formLabel }} {...other} />;
 });
 
-
 const formData = new FormData()
-
-
 const PageSignup = (props) => {
     console.log(props.users.user)
     console.log(props.users.error)

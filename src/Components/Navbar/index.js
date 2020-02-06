@@ -119,12 +119,10 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 const PageNav = (props) => {
-
     let username = props.users.user && props.users.user.username ? props.users.user.username : "unknown"
     let position = props.users.user && props.users.user.position ? props.users.user.position : "unknown"
     let email = props.users.user && props.users.user.email ? props.users.user.email : "unknown"
     const [open, setOpen] = React.useState(false)
-
     const handleClickOpen = () => {
         setOpen(true);
     };
@@ -137,10 +135,8 @@ const PageNav = (props) => {
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-
     const handleProfileMenuOpen = event => {
         setAnchorEl(event.currentTarget);
     }
@@ -193,12 +189,10 @@ const PageNav = (props) => {
                     onClick={lockMeOut}
                 >
                     RESET
-        </Button>
+                </Button>
             </MenuItem>
         </Menu>
     );
-
-
     const menuAuthedId = 'primary-search-account-menu';
     const renderMenuAuthed = (
         <Menu
@@ -242,8 +236,6 @@ const PageNav = (props) => {
             </MenuItem>
         </Menu>
     );
-
-
     const mobileMenuId = 'primary-search-account-menu-mobile';
     const renderMobileMenu = (
         <Menu
@@ -259,12 +251,12 @@ const PageNav = (props) => {
             <MenuItem onClick={handleMenuClose}>
                 <NavLink to={routes.SIGNUP}>
                     REGISTER
-    </NavLink>
+            </NavLink>
             </MenuItem>
             <MenuItem onClick={handleMenuClose}>
                 <NavLink to={routes.SIGNIN}>
                     LOGIN
-    </NavLink>
+            </NavLink>
             </MenuItem>
             <MenuItem onClick={handleMenuClose}>
                 <Button
@@ -275,11 +267,10 @@ const PageNav = (props) => {
                     onClick={lockMeOut}
                 >
                     RESET
-        </Button>
-            </MenuItem>
-        </Menu>
+            </Button>
+                </MenuItem>
+            </Menu>
     );
-
     const mobileMenuAuthedId = 'primary-search-account-menu-mobile';
     const renderMobileMenuAuthed = (
         <Menu
@@ -327,11 +318,10 @@ const PageNav = (props) => {
                     onClick={lockMeOut}
                 >
                     RESET
-        </Button>
+                </Button>
             </MenuItem>
         </Menu>
     );
-
     return (
         <div className={classes.grow}>
             {
